@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.10"
 
 [[package]]
@@ -389,7 +389,7 @@ wheels = [
 
 [[package]]
 name = "slurmutils"
-version = "1.1.6"
+version = "1.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "jsonschema" },

@@ -18,7 +18,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "slurmutils"
-version = "1.1.6"
+version = "1.2.0"
 description = "Utilities and APIs for interfacing with the Slurm workload manager."
 authors = [{ name = "Jason C. Nucciarone", email = "nuccitheboss@ubuntu.com" }]
 requires-python = ">=3.10"
