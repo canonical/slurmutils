@@ -45,7 +45,7 @@ fmt: lock
 
 # Check code against coding style standards
 lint: lock
-    {{uv_run}} codespell
+    {{uv_run}} codespell --skip uv.lock
     {{uv_run}} ruff check
 
 # Run static type checker on code

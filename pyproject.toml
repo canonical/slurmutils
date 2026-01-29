@@ -60,7 +60,12 @@ dev = [
     # Linting
     "ruff",
     "codespell",
-    "pyright"
+    "pyright",
+
+    # TiCS scan dependencies
+    "flake8",
+    "pylint",
+    "pyyaml",
 ]
 
 [project.urls]
