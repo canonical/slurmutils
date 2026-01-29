@@ -15,7 +15,6 @@
 
 """Unit tests for models and editor representing the `slurm.conf` configuration file."""
 
-
 from constants import EXAMPLE_SLURM_CONFIG
 from pyfakefs.fake_filesystem_unittest import TestCase
 

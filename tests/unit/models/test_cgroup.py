@@ -15,7 +15,6 @@
 
 """Unit tests for the model and editor of the `cgroup.conf` configuration file."""
 
-
 from constants import EXAMPLE_CGROUP_CONFIG
 from pyfakefs.fake_filesystem_unittest import TestCase
 

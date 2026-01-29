@@ -15,7 +15,6 @@
 
 """Unit tests for the model and editor of the `acct_gather.conf` configuration file."""
 
-
 from constants import EXAMPLE_ACCT_GATHER_CONFIG
 from pyfakefs.fake_filesystem_unittest import TestCase
 
@@ -109,10 +108,12 @@ class TestAcctGatherConfigEditor(TestCase):
         config = acctgatherconfig.load("/etc/slurm/acct_gather.conf")
         self.assertEqual(config.energy_ipmi_frequency, 2)
         self.assertFalse(config.energy_ipmi_calc_adjustment)
-        self.assertDictEqual(
-            config.energy_ipmi_power_sensors,
-            {"node": [20, 21], "socket1": [10, 26], "knc": [16, 19]},
-        ),
+        (
+            self.assertDictEqual(
+                config.energy_ipmi_power_sensors,
+                {"node": [20, 21], "socket1": [10, 26], "knc": [16, 19]},
+            ),
+        )
         self.assertEqual(config.energy_ipmi_username, "testipmiusername1")
         self.assertEqual(config.energy_ipmi_password, "testipmipassword1")
         self.assertEqual(config.energy_ipmi_timeout, 20)

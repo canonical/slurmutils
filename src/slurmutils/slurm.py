@@ -376,7 +376,9 @@ class SlurmConfig(Model):
     health_check_node_state: Annotated[list[str] | None, Metadata(callback=CommaSepCallback)]
     health_check_program: str | None
     inactive_limit: int | None
-    include: Annotated[list[str] | None, Metadata(sep=" ", unique=False, callback=MultilineCallback)]
+    include: Annotated[
+        list[str] | None, Metadata(sep=" ", unique=False, callback=MultilineCallback)
+    ]
     interactive_step_options: str | None
     job_acct_gather_type: str | None
     job_acct_gather_frequency: Annotated[
