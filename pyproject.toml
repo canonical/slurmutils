@@ -55,7 +55,7 @@ dev = [
     # Test deps
     "coverage[toml] ~= 7.6",
     "pyfakefs ~= 5.9",
-    "pytest ~= 8.3",
+    "pytest>=8.3,<10.0",
 
     # Linting
     "ruff",
