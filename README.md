@@ -2,7 +2,7 @@
 
 ![PyPI - Version](https://img.shields.io/pypi/v/slurmutils)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/slurmutils)
-![GitHub License](https://img.shields.io/github/license/charmed-hpc/slurmutils)
+![GitHub License](https://img.shields.io/github/license/canonical/slurmutils)
 [![Matrix](https://img.shields.io/matrix/ubuntu-hpc%3Amatrix.org?logo=matrix&label=ubuntu-hpc)](https://matrix.to/#/#hpc:ubuntu.com)
 
 Utilities and APIs for interfacing with the Slurm workload manager.
@@ -202,8 +202,7 @@ with slurmdbdconfig.edit("/etc/slurm/slurmdbd.conf") as config:
 If you want to learn more about all the things you can do with slurmutils, 
 here are some further resources for you to explore:
 
-* [Open an issue](https://github.com/charmed-hpc/slurmutils/issues/new?title=ISSUE+TITLE&body=*Please+describe+your+issue*)
-* [Ask a question on GitHub](https://github.com/orgs/charmed-hpc/discussions/categories/q-a)
+* [Open an issue](https://github.com/canonical/slurmutils/issues/new?title=ISSUE+TITLE&body=*Please+describe+your+issue*)
 
 ## 🛠️ Development
 
@@ -231,7 +230,6 @@ Here’s some links to help you get started with joining the community:
 * [Contributing guidelines](./CONTRIBUTING.md)
 * [Join the conversation on Matrix](https://matrix.to/#/#hpc:ubuntu.com)
 * [Get the latest news on Discourse](https://discourse.ubuntu.com/c/hpc/151)
-* [Ask and answer questions on GitHub](https://github.com/orgs/charmed-hpc/discussions/categories/q-a)
 
 ## 📋 License
 
