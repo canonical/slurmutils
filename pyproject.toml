@@ -69,8 +69,8 @@ dev = [
 ]
 
 [project.urls]
-repository = "https://github.com/charmed-hpc/slurmutils"
-issues = "https://github.com/charmed-hpc/slurmutils/issues"
+repository = "https://github.com/canonical/slurmutils"
+issues = "https://github.com/canonical/slurmutils/issues"
 
 [tool.coverage.run]
 branch = true
