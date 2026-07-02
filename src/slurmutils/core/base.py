@@ -30,6 +30,7 @@ __all__ = [
 ]
 
 import json
+import sys
 from abc import ABC, ABCMeta, abstractmethod
 from collections import Counter, deque
 from collections.abc import (
@@ -62,6 +63,19 @@ from typing_extensions import Self, get_original_bases
 
 from ..exceptions import ModelError
 from .callback import Callback, DefaultCallback
+
+if sys.version_info >= (3, 14):
+    from annotationlib import Format, get_annotations
+else:
+    # The `__annotations__` attribute was removed from the `namespace` argument
+    # of ABCMeta classes in Python 3.14, and replaced by the new
+    # `annotationlib.get_annotations` function. Thus, we patch up a shim for 3.12
+    # to make the code consistent between versions.
+    class Format:
+        VALUE = 1
+
+    def get_annotations(obj, *, format=Format.VALUE):  # noqa: ARG001
+        return dict(getattr(obj, "__annotations__", {}) or {})
 
 
 class classproperty(property):  # noqa N801
@@ -182,14 +196,13 @@ class _ModelMeta(ABCMeta):
         /,
         **kwargs: dict[str, Any],
     ) -> "_ModelMeta":
-        field: str
+        cls = super().__new__(mcls, name, bases, namespace, **kwargs)
 
-        if "__annotations__" in namespace:
-            for field, annotation in namespace["__annotations__"].items():
-                metadata = _get_metadata(annotation)
-                namespace[field] = _make_property(_format_field(field), metadata.default_factory)
+        for field, annotation in get_annotations(cls, format=Format.VALUE).items():
+            metadata = _get_metadata(annotation)
+            setattr(cls, field, _make_property(_format_field(field), metadata.default_factory))
 
-        return super().__new__(mcls, name, bases, namespace, **kwargs)
+        return cls
 
 
 class _ModelBase(metaclass=_ModelMeta):
@@ -474,7 +487,7 @@ def _make_property(name: str, default_factory: Callable[[], Any] | None = None) 
 
 
 def _make_annotation_map(
-    model_t: _ModelBase, include_origin: bool = False
+    model_t: type[_ModelBase], include_origin: bool = False
 ) -> dict[str, Annotated]:
     """Make a metadata mapping from a model class.
 
@@ -533,11 +546,11 @@ def _get_type(annotation: type) -> tuple[Any, ...]:
         return (annotation,)
 
 
-def _get_primary_key(model_t: _ModelBase) -> str | None:
+def _get_primary_key(model_t: type[_ModelBase]) -> str | None:
     r"""Get primary key of model.
 
     Args:
-        model_t: Model to get primary key of.
+        model_t: Model class to get primary key of.
 
     Returns:
         Model's primary key or `None` if the model has no declared primary key.
@@ -559,7 +572,7 @@ def _glom_primary_key(model_list: ModelList) -> str:
     Raises:
         ModelError: Raised if not all models in the list have the same primary key.
     """
-    primary_keys = Counter([_get_primary_key(model) for model in model_list])
+    primary_keys = Counter([_get_primary_key(type(model)) for model in model_list])
     if len(primary_keys) > 1 or None in primary_keys:
         raise ModelError(
             (
@@ -642,7 +655,7 @@ def _parse(model_t, s: str) -> Iterable[Any]:
 
 @_parse.register
 def _(model_t: Model, s: str) -> dict[str, Any]:
-    annotation_map = _make_annotation_map(model_t)
+    annotation_map = _make_annotation_map(cast(type, model_t))
 
     classification_map: dict[str, list[str]] = {}
     for token, expr in _scan(s, mode=model_t.__model_mode__):
@@ -815,7 +828,7 @@ def _marshal(model) -> str:
 
 @_marshal.register
 def _(model: Model) -> str:
-    annotation_map = _make_annotation_map(model, include_origin=True)
+    annotation_map = _make_annotation_map(type(model), include_origin=True)
     result: deque[str] = deque()
 
     # Directly access `_model_data` here because `_expand(...)` does not
