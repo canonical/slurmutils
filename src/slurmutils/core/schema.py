@@ -1204,7 +1204,7 @@ SLURM_CONFIG_MODEL_SCHEMA = {
         "resvprolog": {"type": "string"},
         "returntoservice": {"type": "integer", "minimum": 0, "maximum": 2},
         "schedulerparameters": {
-            "type": "boolean",
+            "type": "object",
             "properties": {
                 "allow_zero_lic": {"type": "boolean"},
                 "assoc_limit_stop": {"type": "boolean"},
