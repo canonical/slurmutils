@@ -1550,7 +1550,7 @@ SLURM_CONFIG_MODEL_SCHEMA = {
             },
             "additionalProperties": False,
         },
-        "switchtype": {"type": "string", "enum": ["switch/hpe_slingshot", "switch/nvidia_imex"]},
+        "switchtype": {"type": "string", "enum": ["switch/none", "switch/hpe_slingshot", "switch/nvidia_imex"]},
         "taskepilog": {"type": "string"},
         "taskplugin": {
             "type": "array",
