@@ -63,6 +63,7 @@ from typing_extensions import Self, get_original_bases
 
 from ..exceptions import ModelError
 from .callback import Callback, DefaultCallback
+from .normalize import normalize_for_schema
 
 if sys.version_info >= (3, 14):
     from annotationlib import Format, get_annotations
@@ -269,8 +270,11 @@ class _ModelBase(metaclass=_ModelMeta):
             if instance is not None
             else _get_as_builtin_object(self._model_data)
         )
+        # Normalize the schema for case-insensitivity before validation
+        schema = self.__model_schema__
+        instance = normalize_for_schema(instance, schema)
         try:
-            validate(instance, schema=self.__model_schema__)
+            validate(instance, schema=schema)
         except ValidationError as e:
             raise ModelError(e.message)
 
