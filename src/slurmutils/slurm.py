@@ -399,13 +399,13 @@ class SlurmConfig(Model):
     job_comp_port: int | None
     job_comp_type: str | None
     job_comp_user: str | None
-    job_container_type: str | None
     job_file_append: Annotated[bool | None, Metadata(callback=IntBoolCallback)]
     job_requeue: Annotated[bool | None, Metadata(callback=IntBoolCallback)]
     job_submit_plugins: Annotated[list[str] | None, Metadata(callback=CommaSepCallback)]
     kill_on_bad_exit: Annotated[bool | None, Metadata(callback=IntBoolCallback)]
     kill_wait: int | None
     max_batch_requeue: int | None
+    namespace_type: str | None
     node_features_plugins: Annotated[list[str] | None, Metadata(callback=CommaSepCallback)]
     launch_parameters: Annotated[
         dict[str, bool] | None,
