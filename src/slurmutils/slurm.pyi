@@ -234,13 +234,13 @@ class SlurmConfig(Model):
     job_comp_port: int | None
     job_comp_type: str | None
     job_comp_user: str | None
-    job_container_type: str | None
     job_file_append: bool | None
     job_requeue: bool | None
     job_submit_plugins: list[str] | None
     kill_on_bad_exit: bool | None
     kill_wait: int | None
     max_batch_requeue: int | None
+    namespace_type: str | None
     node_features_plugins: list[str] | None
     launch_parameters: dict[str, bool] | None
     licenses: dict[str, bool | int] | None
