@@ -269,8 +269,8 @@ OCI_CONFIG_MODEL_SCHEMA = {
                     "glob_silence",
                     "jobaccountgather",
                     "jobcomp",
-                    "jobcontainer",
                     "license",
+                    "namespace",
                     "network",
                     "networkraw",
                     "nodefeatures",
@@ -728,8 +728,8 @@ SLURM_CONFIG_MODEL_SCHEMA = {
                     "glob_silence",
                     "jobaccountgather",
                     "jobcomp",
-                    "jobcontainer",
                     "license",
+                    "namespace",
                     "network",
                     "networkraw",
                     "nodefeatures",
@@ -864,7 +864,6 @@ SLURM_CONFIG_MODEL_SCHEMA = {
             ],
         },
         "jobcompuser": {"type": "string"},
-        "jobcontainertype": {"type": "string", "enum": ["job_container/tmpfs"]},
         "jobfileappend": {"type": "boolean"},
         "jobrequeue": {"type": "boolean"},
         "jobsubmitplugins": {
@@ -886,6 +885,13 @@ SLURM_CONFIG_MODEL_SCHEMA = {
         "killonbadexit": {"type": "boolean"},
         "killwait": {"type": "integer", "minimum": 0, "maximum": 65533},
         "maxbatchrequeue": {"type": "integer", "minimum": 0},
+        "namespacetype": {
+            "type": "string",
+            "enum": [
+                "namespace/linux",
+                "namespace/tmpfs",
+            ]
+        },
         "nodefeaturesplugins": {
             "type": "array",
             "items": {
