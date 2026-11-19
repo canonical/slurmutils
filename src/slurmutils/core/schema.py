@@ -890,7 +890,7 @@ SLURM_CONFIG_MODEL_SCHEMA = {
             "enum": [
                 "namespace/linux",
                 "namespace/tmpfs",
-            ]
+            ],
         },
         "nodefeaturesplugins": {
             "type": "array",
