@@ -263,6 +263,7 @@ class SlurmConfig(Model):
     min_job_age: int | None
     mpi_default: str | None
     mpi_params: dict[str, bool | str] | None
+    namespace_type: str | None
     over_time_limit: int | str | None
     plugin_dir: list[str] | None
     plug_stack_config: str | None
