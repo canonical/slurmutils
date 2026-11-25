@@ -440,6 +440,7 @@ class SlurmConfig(Model):
         dict[str, bool | str] | None,
         Metadata(callback=CommaDictCallback),
     ]
+    namespace_type: str | None
     over_time_limit: int | str | None
     plugin_dir: Annotated[list[str] | None, Metadata(callback=ColonSepCallback)]
     plug_stack_config: str | None
